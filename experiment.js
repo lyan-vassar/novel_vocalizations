@@ -1,5 +1,7 @@
 // Loads jsPsych
-var jsPsych = initJsPsych({});
+var jsPsych = initJsPsych({
+    show_progress_bar: true
+});
 
 // Timeline that holds javascript variables (instructioins, stimuli) to appear in chronological order 
 var timeline = [];
@@ -89,7 +91,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Next\" to proceed.</p>"}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Continue\" to proceed.</p>"}
     ]
 }
 
