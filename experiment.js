@@ -34,14 +34,41 @@ jsPsych.data.addProperties({
 });
 
 /* RUNNING THE EXPERIMENT */
+// Welcome message
+var welcome = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>Welcome to our study!</p><p>Click the button below to proceed.</p>",
+    choices: ["Next"]
+}
+
+timeline.push(welcome);
+
 // Instructions
 var instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>To begin the experiment, hit the space bar.</p>",
-    choice: [" "],
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>In this study, you will hear a series of sounds. Each sound was created by a person in order to express a particular meaning. After listening to each sound, you will be asked to guess what that intended meaning was. Even if you feel unsure of the intended meaning, please make your best guess. You will not be penalized for guessing incorrectly.</p><p>It is important that you read the directions carefully and listen closely to the sounds. To ensure that you are paying attention, you will occasionally hear a person's voice saying \"cats and dogs\" and will be asked to indicate when you hear this. If you fail the attention check, your participation may not be counted.</p><p>Click the button below to proceed.</p>",
+    choices: ["Next"]
 };
 
 timeline.push(instructions);
+
+// make sure participant has headphones
+var headphoneCheck = {
+    type: jsPsychAudioButtonResponse,
+    stimulus: "glass-of-wine-143532.mp3",
+    choices: ["Next"],
+    prompt: "<p>This experiment uses audio prompts. We ask that you use headphones.</p><p>Please adjust your audio until you can hear the music. Once you can hear the music, click the button above to proceed.</p>"
+}
+
+timeline.push(headphoneCheck);
+
+var experimentStart = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>The experiment will now begin. You will be presented with 33 trials, followed by a short survey.</p><p>Click the button below to proceed.</p>",
+    choices: ["Next"]
+}
+
+timeline.push(experimentStart);
 
 // var audioPrompt = {
 //     type: jsPsychAudioButtonResponse,
@@ -62,7 +89,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "What word would you associate with this?"}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Next\" to proceed.</p>"}
     ]
 }
 
