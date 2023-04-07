@@ -29,4 +29,7 @@ var version_y = [
     {audio: "vocalizations/NC_tiger.wav"},
     {audio: "vocalizations/KD_water.wav"},
     {audio: "vocalizations/BW_woman.wav"},
+    {audio: "vocalizations/catsanddogs2.mp3"},
+    {audio: "vocalizations/catsanddogs2.mp3"},
+    {audio: "vocalizations/catsanddogs1.mp3"}
 ]
