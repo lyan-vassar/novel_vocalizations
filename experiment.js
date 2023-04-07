@@ -67,8 +67,8 @@ var prompt = {
 }
 
 var experiment = {
-    //timeline: [prompt],
-    timeline: [audioPrompt, question],
+    timeline: [prompt],
+    //timeline: [audioPrompt, question],
     //timeline_variables: {audio: "vocalizations/AB_gather.wav"},
     timeline_variables: test_stimuli[versionNum],
     randomize_order: true
