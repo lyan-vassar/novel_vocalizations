@@ -91,7 +91,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Continue\" to proceed.</p>"}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
     ]
 }
 
@@ -148,9 +148,22 @@ timeline.push(save_server_data);
 //     }
 // }
 
+// for datapipe
+const subject_id_new = jsPsych.randomization.randomID(10);
+const filename = `${subject_id_new}.csv`;
+
+const save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "Fo6CtMaRdkh2",
+    filename: filename,
+    data_string: ()=>jsPsych.data.get().csv()
+  };
+  timeline.push(save_data);
+
 var goodbye = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Thanks for participating! <a href='https://app.prolific.co/submissions/complete?cc=9231C938'>Click here to return to Prolific and complete the study</a>."
+    stimulus: "Thanks for participating! <a href='https://app.prolific.co/submissions/complete?cc=C5RU6STB'>Click here to return to Prolific and complete the study</a>."
 }
 
 
