@@ -66,6 +66,12 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                 pretty_name: "Preamble",
                 default: null,
             },
+            /** Label of the button to replay audio. */
+            replay_label: {
+                type: jspsych.ParameterType.STRING,
+                pretty_name: "Replay label",
+                default: "Replay sound",
+            },
             /** Label of the button to submit responses. */
             button_label: {
                 type: jspsych.ParameterType.STRING,
@@ -113,6 +119,7 @@ var jsPsychAudioSurveyText = (function (jspsych) {
               else {
                   this.audio = buffer;
                   this.audio.currentTime = 0;
+                  //this.audio.loop = true;
               }
               setupTrial();
           })
@@ -120,17 +127,21 @@ var jsPsychAudioSurveyText = (function (jspsych) {
               console.error(`Failed to load audio file "${trial.stimulus}". Try checking the file path. We recommend using the preload plugin to load audio files.`);
               console.error(err);
           });
+          //var html = "";
           const setupTrial = () => {
               // start audio
               if (context !== null) {
+                    //console.log("hi1");
                   startTime = context.currentTime;
                   this.audio.start(startTime);
               }
               else {
+                //console.log("hi2");
                   this.audio.play();
               }
-              on_load();
-          };
+
+              on_load();              
+            };
             for (var i = 0; i < trial.questions.length; i++) {
                 if (typeof trial.questions[i].rows == "undefined") {
                     trial.questions[i].rows = 1;
@@ -154,6 +165,31 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                         trial.preamble +
                         "</div>";
             }
+            //replay button
+            // html +=
+            // '<div id="replay"><input type="button" id="jspsych-audio-replay" class="jspsych-btn" value="' +
+            //     trial.replay_label +
+            //     '"></input></div>';
+            // //html += "</form>";
+            // display_element.innerHTML = html;
+            // display_element.querySelector("#jspsych-audio-replay").addEventListener("click", (e) => {
+            //     // start audio
+            //     if (context !== null) {
+            //         this.audio.pause();
+            //         this.audio = context.createBufferSource();
+            //         this.audio.buffer = buffer;
+            //         this.audio.connect(context.destination);
+            //         startTime = context.currentTime;
+            //         this.audio.start(startTime);
+            //   }
+            //   else {
+            //         //console.log("hi2");
+            //         this.audio.pause();
+            //         this.audio.currentTime = 0;
+            //         this.audio.play();
+            //   }
+            // });
+            
             // start form
             if (trial.autocomplete) {
                 html += '<form id="jspsych-survey-text-form">';
@@ -178,7 +214,7 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                         question_index +
                         '" class="jspsych-survey-text-question" style="margin: 2em 0em;">';
                 html += '<p class="jspsych-survey-text">' + question.prompt + "</p>";
-                var autofocus = i == 0 ? "autofocus" : "";
+                //var autofocus = i == 0 ? "autofocus" : "";
                 var req = question.required ? "required" : "";
                 if (question.rows == 1) {
                     html +=
@@ -191,8 +227,8 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                             '" size="' +
                             question.columns +
                             '" ' +
-                            autofocus +
-                            " " +
+                            //autofocus +
+                            //" " +
                             req +
                             ' placeholder="' +
                             question.placeholder +
@@ -211,8 +247,8 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                             '" rows="' +
                             question.rows +
                             '" ' +
-                            autofocus +
-                            " " +
+                            //autofocus +
+                            //" " +
                             req +
                             ' placeholder="' +
                             question.placeholder +
@@ -228,7 +264,7 @@ var jsPsychAudioSurveyText = (function (jspsych) {
             html += "</form>";
             display_element.innerHTML = html;
             // backup in case autofocus doesn't work
-            display_element.querySelector("#input-" + question_order[0]).focus();
+            //display_element.querySelector("#input-" + question_order[0]).focus();
             display_element.querySelector("#jspsych-survey-text-form").addEventListener("submit", (e) => {
                 e.preventDefault();
                 if (context !== null) {
@@ -266,7 +302,9 @@ var jsPsychAudioSurveyText = (function (jspsych) {
                 // next trial
                 this.jsPsych.finishTrial(trialdata);
             });
+            
             var startTime = performance.now();
+            
         }
         simulate(trial, simulation_mode, simulation_options, load_callback) {
             if (simulation_mode == "data-only") {
@@ -307,6 +345,7 @@ var jsPsychAudioSurveyText = (function (jspsych) {
             const data = this.create_simulation_data(trial, simulation_options);
             const display_element = this.jsPsych.getDisplayElement();
             this.trial(display_element, trial);
+            this.audio.addEventListener("ended", respond);
             load_callback();
             const answers = Object.entries(data.response).map((x) => {
                 return x[1];
@@ -314,6 +353,7 @@ var jsPsychAudioSurveyText = (function (jspsych) {
             for (let i = 0; i < answers.length; i++) {
                 this.jsPsych.pluginAPI.fillTextInput(display_element.querySelector(`#input-${i}`), answers[i], ((data.rt - 1000) / answers.length) * (i + 1));
             }
+            //this.jsPsych.pluginAPI.clickTarget(display_element.querySelector("#jspsych-audio-replay"), data.rt);
             this.jsPsych.pluginAPI.clickTarget(display_element.querySelector("#jspsych-survey-text-next"), data.rt);
         }
     }

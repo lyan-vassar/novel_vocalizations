@@ -9,7 +9,8 @@ var timeline = [];
 // preload
 var preload = {
     type: jsPsychPreload,
-    audio: ["vocalizations/AB_gather.wav", "vocalizations/BW_bad.wav"]
+    auto_preload: true
+    //audio: ["vocalizations/AB_gather.wav", "vocalizations/BW_bad.wav"]
 }
 timeline.push(preload);
 
@@ -48,7 +49,7 @@ timeline.push(welcome);
 // Instructions
 var instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this study, you will hear a series of sounds. Each sound was created by a person in order to express a particular meaning. After listening to each sound, you will be asked to guess what that intended meaning was. Even if you feel unsure of the intended meaning, please make your best guess. You will not be penalized for guessing incorrectly.</p><p>It is important that you read the directions carefully and listen closely to the sounds. To ensure that you are paying attention, you will occasionally hear a person's voice saying \"cats and dogs\" and will be asked to indicate when you hear this. If you fail the attention check, your participation may not be counted.</p><p>Click the button below to proceed.</p>",
+    stimulus: "<p>In this study, you will hear a series of sounds. Each sound was created by a person in order to express a particular meaning. After listening to each sound, you will be asked to guess what that intended meaning was. Even if you feel unsure of the intended meaning, please make your best guess. You will not be penalized for guessing incorrectly.</p><p><b>Please listen closely, as the sounds will not repeat.</b> If you do not catch the sound, type \"NA\" into the box.</p><p>It is important that you read the directions carefully and listen closely to the sounds. To ensure that you are paying attention, you will occasionally hear a person's voice saying \"cats and dogs\" and will be asked to indicate when you hear this. If you fail the attention check, your participation may not be counted.</p><p>Click the button below to proceed.</p>",
     choices: ["Next"]
 };
 
@@ -91,7 +92,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below.</p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below, limiting your response to one word.</p><p>Occasionally the sound will be someone saying the phrase 'cats and dogs.' When (and only when) you hear this phrase, please type 'cats and dogs' into the box. </p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
     ]
 }
 
@@ -104,6 +105,60 @@ var experiment = {
 };
 
 timeline.push(experiment);
+
+var last_question = {
+    type: jsPsychSurveyText,
+    questions: [
+        {prompt: "It's important for this study that we only use data from participants who were paying attention to the best of their ability. Did you do your best to pay attention during this study and make your best guesses? You will be compensated no matter what, so please answer honestly."}
+    ],
+    required: true
+}
+
+timeline.push(last_question);
+
+var technical_issues = {
+    type: jsPsychSurveyText,
+    questions: [
+        {prompt: "Did you run into any technical issues during the course of this experiment? If yes, please describe them below. If not, write 'N/A.'"}
+    ],
+    required: true
+}
+
+timeline.push(technical_issues);
+
+var age = {
+    type: jsPsychSurveyMultiChoice,
+    preamble: "We are collecting demographic information as part of this study. If you would prefer not to answer any of the questions, you may select \"Prefer not to answer.\" This will not affect your participation.",
+    questions: [{
+        prompt: "What is your age?",
+        name: "dem_age",
+        options: ["18-34", "35-49", "50-64", "65+", "Prefer not to answer"],
+        required: true
+    }]
+}
+
+timeline.push(age);
+
+var eng_first = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [{
+        prompt: "Is English your first language?",
+        name: "dem_eng_first",
+        options: ["Yes", "No"],
+        required: true
+    }]
+}
+
+timeline.push(eng_first);
+
+var first_lang = {
+    type: jsPsychSurveyText,
+    questions: [
+        {prompt: "If you answered 'no' to the previous question, please write your first language(s) below."}
+    ]
+}
+
+timeline.push(first_lang);
 
 // Saves data
 var save_server_data = {
@@ -163,7 +218,7 @@ const save_data = {
 
 var goodbye = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Thanks for participating! <a href='https://app.prolific.co/submissions/complete?cc=C5RU6STB'>Click here to return to Prolific and complete the study</a>."
+    stimulus: "<p>Thank you so much for participating in this study. This study's aim was to test the similarity between different participants' guesses of the meanings of novel vocalizations. Your participation is now complete.</p><p><a href='https://app.prolific.co/submissions/complete?cc=C5RU6STB'>Click here to return to Prolific and complete the study</a>.</p>"
 }
 
 
