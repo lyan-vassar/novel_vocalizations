@@ -58,9 +58,9 @@ timeline.push(instructions);
 // make sure participant has headphones
 var headphoneCheck = {
     type: jsPsychAudioButtonResponse,
-    stimulus: "glass-of-wine-143532.mp3",
+    stimulus: "test_music.mp3",
     choices: ["Next"],
-    prompt: "<p>This experiment uses audio prompts. We ask that you use headphones.</p><p>Please adjust your audio until you can hear the music. Once you can hear the music, click the button above to proceed.</p>"
+    prompt: "<p>This experiment uses audio prompts. We ask that you use headphones.</p><p>Please adjust your audio until you can hear the music very clearly. Make sure your volume is not too quiet, as some of the sounds may be hard to hear. </p><p>Once you can hear the music, click the button above to proceed.</p>"
 }
 
 timeline.push(headphoneCheck);
@@ -92,7 +92,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below, limiting your response to one word.</p><p>Occasionally the sound will be someone saying the phrase 'cats and dogs.' When (and only when) you hear this phrase, please type 'cats and dogs' into the box. </p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below, limiting your response to one word.</p><p>The sound will not repeat. If you did not catch the sound, type \"NA\" into the box.</p><p>Occasionally the sound will be someone saying the phrase 'cats and dogs.' When (and only when) you hear this phrase, please type 'cats and dogs' into the box. </p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
     ]
 }
 
