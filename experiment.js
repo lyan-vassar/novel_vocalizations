@@ -92,7 +92,7 @@ var prompt = {
     stimulus: jsPsych.timelineVariable("audio"),
     //stimulus: "vocalizations/AB_gather.wav",
     questions: [
-        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below, limiting your response to one word.</p><p>The sound will not repeat. If you did not catch the sound, type \"NA\" into the box.</p><p>Occasionally the sound will be someone saying the phrase 'cats and dogs.' When (and only when) you hear this phrase, please type 'cats and dogs' into the box. </p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
+        {prompt: "<p>Listen carefully to the sound. <b>What meaning do you think the person was trying to express with this sound?</b> Type your answer in the box below, <em>limiting your response to one word.</em></p><p>The sound will not repeat. If and only if you did not catch the sound, type \"NA\" into the box. If you are just unsure of its meaning, please make your best guess.</p><p>Occasionally the sound will be someone saying the phrase 'cats and dogs.' When (and only when) you hear this phrase, please type 'cats and dogs' into the box. </p><p>When you have typed your response, click \"Continue\" to proceed.</p>", required: true}
     ]
 }
 
@@ -126,39 +126,39 @@ var technical_issues = {
 
 timeline.push(technical_issues);
 
-var age = {
-    type: jsPsychSurveyMultiChoice,
-    preamble: "We are collecting demographic information as part of this study. If you would prefer not to answer any of the questions, you may select \"Prefer not to answer.\" This will not affect your participation.",
-    questions: [{
-        prompt: "What is your age?",
-        name: "dem_age",
-        options: ["18-34", "35-49", "50-64", "65+", "Prefer not to answer"],
-        required: true
-    }]
-}
+// var age = {
+//     type: jsPsychSurveyMultiChoice,
+//     preamble: "We are collecting demographic information as part of this study. If you would prefer not to answer any of the questions, you may select \"Prefer not to answer.\" This will not affect your participation.",
+//     questions: [{
+//         prompt: "What is your age?",
+//         name: "dem_age",
+//         options: ["18-34", "35-49", "50-64", "65+", "Prefer not to answer"],
+//         required: true
+//     }]
+// }
 
-timeline.push(age);
+// timeline.push(age);
 
-var eng_first = {
-    type: jsPsychSurveyMultiChoice,
-    questions: [{
-        prompt: "Is English your first language?",
-        name: "dem_eng_first",
-        options: ["Yes", "No"],
-        required: true
-    }]
-}
+// var eng_first = {
+//     type: jsPsychSurveyMultiChoice,
+//     questions: [{
+//         prompt: "Is English your first language?",
+//         name: "dem_eng_first",
+//         options: ["Yes", "No"],
+//         required: true
+//     }]
+// }
 
-timeline.push(eng_first);
+// timeline.push(eng_first);
 
-var first_lang = {
-    type: jsPsychSurveyText,
-    questions: [
-        {prompt: "If you answered 'no' to the previous question, please write your first language(s) below."}
-    ]
-}
+// var first_lang = {
+//     type: jsPsychSurveyText,
+//     questions: [
+//         {prompt: "If you answered 'no' to the previous question, please write your first language(s) below."}
+//     ]
+// }
 
-timeline.push(first_lang);
+// timeline.push(first_lang);
 
 // Saves data
 var save_server_data = {
