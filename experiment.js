@@ -218,7 +218,7 @@ const save_data = {
 
 var goodbye = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Thank you so much for participating in this study. This study's aim was to test the similarity between different participants' guesses of the meanings of novel vocalizations. Your participation is now complete.</p><p><a href='https://app.prolific.co/submissions/complete?cc=C5RU6STB'>Click here to return to Prolific and complete the study</a>.</p>"
+    stimulus: "<p>Thank you so much for participating in this study. This study's aim was to test the similarity between different participants' guesses of the meanings of novel vocalizations. Your participation is now complete.</p><p><a href='https://app.prolific.co/submissions/complete?cc=CWV7YYXR'>Click here to return to Prolific and complete the study</a>.</p>"
 }
 
 
